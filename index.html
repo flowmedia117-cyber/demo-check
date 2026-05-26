@@ -186,17 +186,28 @@
         }
         .reel-modal-inner {
             position: relative;
-            width: min(340px, 85vw);
-            aspect-ratio: 9/16;
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 0 60px rgba(255,255,255,0.1);
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+            background: #000;
+            max-width: 92vw;
+            max-height: 90vh;
         }
         #reelModal.active .reel-modal-inner {
             transform: scale(1);
+        }
+        /* Short-form: portrait */
+        .reel-modal-inner.portrait {
+            width: min(340px, 85vw);
+            aspect-ratio: 9/16;
+        }
+        /* Long-form: landscape */
+        .reel-modal-inner.landscape {
+            width: min(860px, 92vw);
+            aspect-ratio: 16/9;
         }
         #reelModalImg {
             width: 100%;
@@ -419,230 +430,196 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         OUR HIGH CTR WORKS — 9:16 Scrolling Reels
+         OUR HIGH CTR WORKS — Clean Portfolio Grid
     ═══════════════════════════════════════════════ -->
     <section id="work" class="relative py-24 bg-[#050505] border-y border-white/5 overflow-hidden">
         <div class="ambient-glow-bottom"></div>
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Our Craft in Action</h2>
-                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">Our High CTR Works</p>
-                <p class="text-neutral-500 mt-4 max-w-lg mx-auto">Scroll through our signature edits — crafted for maximum retention and click-through rate.</p>
-            </div>
+        <div class="max-w-6xl mx-auto px-4">
 
-            <!-- ROW 1: Left → Right scroll -->
-            <div class="reel-scroll-wrapper mb-4">
-                <div class="reel-scroll-track" id="reelRow1">
-                    <!-- Reel cards duplicated for seamless loop -->
-                    <!-- Set A -->
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80" alt="Reel 1" data-label="🔥 12.4M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🔥 12.4M Views</span>
+            <!-- SHORT FORM -->
+            <div class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Short-Form</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight">Reels & TikToks That Go Viral</p>
+                    <p class="text-neutral-500 mt-3 max-w-md mx-auto text-sm">Hook-first editing engineered for maximum CTR on Instagram, TikTok & YouTube Shorts.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+                    <!-- Short 1 -->
+                    <div class="group cursor-pointer" onclick="openReel(this)">
+                        <div class="reel-card w-full mx-auto mb-4" style="width:100%; aspect-ratio:9/16;">
+                            <video src="sneakinn 1.mp4" alt="Short 1"></video>
+                            <div class="reel-overlay">
+                                <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                                <span class="text-white text-[10px] font-bold">🔥 12.4M Views</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2.5 px-1">
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50 text-xs"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-xs font-bold text-white">@rishabhk.creates</div>
+                                <div class="text-[10px] text-neutral-500">"CTR went from 2% → 11%"</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1574717024453-354056afd6fc?w=400&q=80" alt="Reel 2" data-label="⚡ 8.9M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">⚡ 8.9M Views</span>
+                    <!-- Short 2 -->
+                    <div class="group cursor-pointer" onclick="openReel(this)">
+                        <div class="reel-card w-full mx-auto mb-4" style="width:100%; aspect-ratio:9/16;">
+                            <video src="Sneakinn 2.mp4" alt="Short 2"></video>
+                            <div class="reel-overlay">
+                                <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                                <span class="text-white text-[10px] font-bold">⚡ 8.9M Views</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2.5 px-1">
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50 text-xs"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-xs font-bold text-white">@sara.media.co</div>
+                                <div class="text-[10px] text-neutral-500">"12K → 89K in 2 months"</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1598550487031-0898b4852123?w=400&q=80" alt="Reel 3" data-label="🎯 5.2M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎯 5.2M Views</span>
+                    <!-- Short 3 -->
+                    <div class="group cursor-pointer" onclick="openReel(this)">
+                        <div class="reel-card w-full mx-auto mb-4" style="width:100%; aspect-ratio:9/16;">
+                            <video src="Zoe.mp4" alt="Short 3"></video>
+                            <div class="reel-overlay">
+                                <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                                <span class="text-white text-[10px] font-bold">🎯 5.2M Views</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2.5 px-1">
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50 text-xs"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-xs font-bold text-white">@ajcontent.ig</div>
+                                <div class="text-[10px] text-neutral-500">"3 viral reels in month 1"</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1569240651611-f3b8ae2f8deb?w=400&q=80" alt="Reel 4" data-label="📈 3.7M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">📈 3.7M Views</span>
+                    <!-- Short 4 -->
+                    <div class="group cursor-pointer" onclick="openReel(this)">
+                        <div class="reel-card w-full mx-auto mb-4" style="width:100%; aspect-ratio:9/16;">
+                            <video src="SF _1.mp4" alt="Short 4"></video>
+                            <div class="reel-overlay">
+                                <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                                <span class="text-white text-[10px] font-bold">📈 9.1M Views</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1536240478700-b869ad10a2ab?w=400&q=80" alt="Reel 5" data-label="🔥 9.1M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🔥 9.1M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80" alt="Reel 6" data-label="💥 4.6M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">💥 4.6M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80" alt="Reel 7" data-label="🎬 7.3M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎬 7.3M Views</span>
-                        </div>
-                    </div>
-                    <!-- Set B (duplicate for seamless) -->
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80" alt="Reel 1" data-label="🔥 12.4M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🔥 12.4M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1574717024453-354056afd6fc?w=400&q=80" alt="Reel 2" data-label="⚡ 8.9M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">⚡ 8.9M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1598550487031-0898b4852123?w=400&q=80" alt="Reel 3" data-label="🎯 5.2M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎯 5.2M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1569240651611-f3b8ae2f8deb?w=400&q=80" alt="Reel 4" data-label="📈 3.7M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">📈 3.7M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1536240478700-b869ad10a2ab?w=400&q=80" alt="Reel 5" data-label="🔥 9.1M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🔥 9.1M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80" alt="Reel 6" data-label="💥 4.6M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">💥 4.6M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80" alt="Reel 7" data-label="🎬 7.3M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎬 7.3M Views</span>
+                        <div class="flex items-center gap-2.5 px-1">
+                            <div class="w-8 h-8 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50 text-xs"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-xs font-bold text-white">@linashots</div>
+                                <div class="text-[10px] text-neutral-500">"+62K in 6 weeks"</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ROW 2: Right → Left scroll (reverse) -->
-            <div class="reel-scroll-wrapper mb-8">
-                <div class="reel-scroll-track reverse" id="reelRow2">
-                    <!-- Set A -->
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1621361365424-06f0e1eb5051?w=400&q=80" alt="Reel 8" data-label="🚀 6.8M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🚀 6.8M Views</span>
+            <!-- LONG FORM -->
+            <div>
+                <div class="text-center mb-12">
+                    <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Long-Form</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight">YouTube Videos That Retain</p>
+                    <p class="text-neutral-500 mt-3 max-w-md mx-auto text-sm">Cinematic long-form edits that hold attention from first frame to last second.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Long 1 -->
+                    <div class="group cursor-pointer border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-colors rounded-2xl overflow-hidden" onclick="openReel(this)">
+                        <div class="relative aspect-video overflow-hidden">
+                            <video src="blume trailer 3.mp4" alt="Long 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
+                                    <i class="fa-solid fa-play text-black text-lg ml-1"></i>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] font-mono px-2 py-1 rounded-md">18:42</div>
+                            <div class="absolute top-3 left-3 bg-white/10 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">🔥 4.6M Views</div>
+                        </div>
+                        <div class="p-4 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@neilpatelio</div>
+                                <div class="text-xs text-neutral-400 mt-0.5">"24hr turnaround, viral-ready every time"</div>
+                                <div class="growth-pill mt-1.5"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +120K reach / video</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1588912914842-f5f8beefaef1?w=400&q=80" alt="Reel 9" data-label="⭐ 11M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">⭐ 11M Views</span>
+                    <!-- Long 2 -->
+                    <div class="group cursor-pointer border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-colors rounded-2xl overflow-hidden" onclick="openReel(this)">
+                        <div class="relative aspect-video overflow-hidden">
+                            <video src="youtube longform.mp4" alt="Long 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
+                                    <i class="fa-solid fa-play text-black text-lg ml-1"></i>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] font-mono px-2 py-1 rounded-md">24:15</div>
+                            <div class="absolute top-3 left-3 bg-white/10 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">🎬 7.3M Views</div>
+                        </div>
+                        <div class="p-4 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@marcusyoutube</div>
+                                <div class="text-xs text-neutral-400 mt-0.5">"Every edit feels like a short film"</div>
+                                <div class="growth-pill mt-1.5"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 68% avg retention</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1601933513793-45d855e765e2?w=400&q=80" alt="Reel 10" data-label="🎯 2.9M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎯 2.9M Views</span>
+                    <!-- Long 3 -->
+                    <div class="group cursor-pointer border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-colors rounded-2xl overflow-hidden" onclick="openReel(this)">
+                        <div class="relative aspect-video overflow-hidden">
+                            <video src="Trailer amaan.mp4" alt="Long 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
+                                    <i class="fa-solid fa-play text-black text-lg ml-1"></i>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] font-mono px-2 py-1 rounded-md">31:08</div>
+                            <div class="absolute top-3 left-3 bg-white/10 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">🚀 6.8M Views</div>
+                        </div>
+                        <div class="p-4 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@priyacreates</div>
+                                <div class="text-xs text-neutral-400 mt-0.5">"Subscribers doubled in 60 days"</div>
+                                <div class="growth-pill mt-1.5"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 0 → 200K subs</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80" alt="Reel 11" data-label="💎 4.1M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">💎 4.1M Views</span>
+                    <!-- Long 4 -->
+                    <div class="group cursor-pointer border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-colors rounded-2xl overflow-hidden" onclick="openReel(this)">
+                        <div class="relative aspect-video overflow-hidden">
+                            <video src="Jim Donnelly, U.S. Army veteran trailer.mp4" alt="Long 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-2xl">
+                                    <i class="fa-solid fa-play text-black text-lg ml-1"></i>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] font-mono px-2 py-1 rounded-md">42:30</div>
+                            <div class="absolute top-3 left-3 bg-white/10 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">⭐ 11M Views</div>
                         </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=400&q=80" alt="Reel 12" data-label="🔥 8.5M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🔥 8.5M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=400&q=80" alt="Reel 13" data-label="📊 3.3M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">📊 3.3M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=80" alt="Reel 14" data-label="🎵 5.7M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎵 5.7M Views</span>
-                        </div>
-                    </div>
-                    <!-- Set B duplicate -->
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1621361365424-06f0e1eb5051?w=400&q=80" alt="Reel 8" data-label="🚀 6.8M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🚀 6.8M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1588912914842-f5f8beefaef1?w=400&q=80" alt="Reel 9" data-label="⭐ 11M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">⭐ 11M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1601933513793-45d855e765e2?w=400&q=80" alt="Reel 10" data-label="🎯 2.9M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎯 2.9M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80" alt="Reel 11" data-label="💎 4.1M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">💎 4.1M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=400&q=80" alt="Reel 12" data-label="🔥 8.5M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🔥 8.5M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=400&q=80" alt="Reel 13" data-label="📊 3.3M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">📊 3.3M Views</span>
-                        </div>
-                    </div>
-                    <div class="reel-card" onclick="openReel(this)">
-                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=80" alt="Reel 14" data-label="🎵 5.7M Views">
-                        <div class="reel-overlay">
-                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
-                            <span class="text-white text-[10px] font-bold">🎵 5.7M Views</span>
+                        <div class="p-4 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex-shrink-0 flex items-center justify-center text-white/50"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@devontalks</div>
+                                <div class="text-xs text-neutral-400 mt-0.5">"Best investment I made for my channel"</div>
+                                <div class="growth-pill mt-1.5"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 11M views in 3 months</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+        </div>
+
+        <!-- DUMMY SCROLL TRACKS (kept for JS compatibility but hidden) -->
+        <div style="display:none">
+            <div class="reel-scroll-track" id="reelRow1">
+                <div class="reel-card" onclick="openReel(this)">
+                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80" alt="Reel 1" data-label="🔥 12.4M Views">
+                    <div class="reel-overlay"><button class="reel-play-btn"><i class="fa-solid fa-play"></i></button><span class="text-white text-[10px] font-bold">🔥 12.4M Views</span></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -677,140 +654,117 @@
             </div>
             <div class="border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors rounded-2xl p-8 relative overflow-hidden group">
                 <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full filter blur-xl group-hover:bg-white/10 transition-colors"></div>
-                <div class="text-3xl mb-6 text-white"><i class="fa-solid fa-bolt"></i></div>
-                <h3 class="text-xl font-bold mb-3">VSLs & Paid Ads</h3>
-                <p class="text-neutral-400 text-sm leading-relaxed mb-6">High-converting video sales letters and advertising creatives specifically calibrated to drive ROI.</p>
+                <div class="text-3xl mb-6 text-white"><i class="fa-brands fa-instagram"></i></div>
+                <h3 class="text-xl font-bold mb-3">Instagram Reels</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">Scroll-stopping Reels crafted for Instagram's algorithm — designed to grow followers and maximize reach.</p>
                 <ul class="space-y-2.5 text-xs text-neutral-500 font-mono">
-                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Conversion hook iterations</li>
-                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Animated text highlighting</li>
-                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Color grading for trust</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Hook-first vertical edits</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Trending audio & transitions</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Caption & cover optimization</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         CLIENT FEEDBACK — Instagram Growth Showcase
+         CLIENT FEEDBACK
     ═══════════════════════════════════════════════ -->
-    <section id="pricing" class="py-24 bg-[#050505] border-y border-white/5 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
+    <section id="pricing" class="py-24 bg-[#050505] border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
                 <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Real Results</h2>
-                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">What our clients are saying.</p>
-                <p class="text-neutral-500 mt-4 max-w-lg mx-auto">Real creators. Real Instagram growth. Powered by Flow Media edits.</p>
+                <p class="text-3xl sm:text-4xl font-extrabold tracking-tight">What our clients are saying.</p>
             </div>
 
-            <!-- Testimonial scrolling row 1 -->
-            <div class="reel-scroll-wrapper mb-6">
-                <div style="display:flex; gap:16px; width:max-content; animation: scrollLeft 35s linear infinite;">
-                    <!-- Card 1 -->
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">RK</div>
-                            <div>
-                                <div class="text-sm font-bold text-white">@rishabhk.creates</div>
-                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
-                            </div>
-                        </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"Flow Media completely transformed my reels. My CTR went from 2% to 11% in just 3 weeks. The edits are insane quality."</p>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +48K followers / month</div>
-                            <span class="text-yellow-400 text-xs">★★★★★</span>
-                        </div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
-                            <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=500&q=80" alt="Instagram growth screenshot" class="w-full h-28 object-cover">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Card 1 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&q=80" alt="Rishabh K" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+                        <div>
+                            <div class="text-sm font-bold text-white">@rishabhk.creates</div>
+                            <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
                         </div>
                     </div>
-                    <!-- Card 2 -->
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-sm">SM</div>
-                            <div>
-                                <div class="text-sm font-bold text-white">@sara.media.co</div>
-                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
-                            </div>
-                        </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"My brand went from 12K to 89K in 2 months. The hook-first editing style gets people watching every single time."</p>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 0 → 89K followers</div>
-                            <span class="text-yellow-400 text-xs">★★★★★</span>
-                        </div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
-                            <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=500&q=80" alt="Instagram growth" class="w-full h-28 object-cover">
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-3">"CTR went from 2% to 11% in just 3 weeks. The edits are insane quality."</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +48K followers / month</div>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Sara M" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+                        <div>
+                            <div class="text-sm font-bold text-white">@sara.media.co</div>
+                            <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
                         </div>
                     </div>
-                    <!-- Card 3 -->
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-sm">AJ</div>
-                            <div>
-                                <div class="text-sm font-bold text-white">@ajcontent.ig</div>
-                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
-                            </div>
-                        </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"I was posting consistently but getting nowhere. Flow Media's editing style literally changed everything. 3 viral reels in my first month."</p>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 3 Viral Reels in Month 1</div>
-                            <span class="text-yellow-400 text-xs">★★★★★</span>
-                        </div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
-                            <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=500&q=80" alt="Growth chart" class="w-full h-28 object-cover">
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-3">"Went from 12K to 89K in 2 months. The hook-first style gets people watching every time."</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 12K → 89K followers</div>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" alt="AJ" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+                        <div>
+                            <div class="text-sm font-bold text-white">@ajcontent.ig</div>
+                            <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
                         </div>
                     </div>
-                    <!-- Card 4 -->
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-400 flex items-center justify-center text-white font-bold text-sm">NP</div>
-                            <div>
-                                <div class="text-sm font-bold text-white">@neilpatelio</div>
-                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
-                            </div>
-                        </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"The 24-hour turnaround is INSANE. I feed them raw footage and get back a viral-ready reel the next day. Worth every penny."</p>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +120K reach / reel</div>
-                            <span class="text-yellow-400 text-xs">★★★★★</span>
-                        </div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80" alt="Analytics" class="w-full h-28 object-cover">
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-3">"Flow Media changed everything. 3 viral reels in my very first month working with them."</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 3 viral reels in month 1</div>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80" alt="Neil P" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+                        <div>
+                            <div class="text-sm font-bold text-white">@neilpatelio</div>
+                            <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
                         </div>
                     </div>
-                    <!-- Card 5 -->
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">LS</div>
-                            <div>
-                                <div class="text-sm font-bold text-white">@linashots</div>
-                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
-                            </div>
-                        </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"Every edit feels like it was made by a director. The cinematic grading on my travel content is just next level."</p>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +62K in 6 weeks</div>
-                            <span class="text-yellow-400 text-xs">★★★★★</span>
-                        </div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
-                            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=500&q=80" alt="Growth" class="w-full h-28 object-cover">
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-3">"24hr turnaround is INSANE. Raw footage in, viral-ready reel out the next day."</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +120K reach / reel</div>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80" alt="Lina S" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+                        <div>
+                            <div class="text-sm font-bold text-white">@linashots</div>
+                            <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
                         </div>
                     </div>
-                    <!-- Duplicates for scroll loop -->
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">RK</div>
-                            <div><div class="text-sm font-bold text-white">@rishabhk.creates</div><div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div></div>
-                        </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"Flow Media completely transformed my reels. My CTR went from 2% to 11% in just 3 weeks."</p>
-                        <div class="flex items-center gap-2 flex-wrap"><div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +48K followers / month</div><span class="text-yellow-400 text-xs">★★★★★</span></div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5"><img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=500&q=80" class="w-full h-28 object-cover"></div>
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-3">"Every edit feels like a director made it. The cinematic grading on my travel content is next level."</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +62K in 6 weeks</div>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-sm">SM</div>
-                            <div><div class="text-sm font-bold text-white">@sara.media.co</div><div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div></div>
+                </div>
+                <!-- Card 6 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Priya" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+                        <div>
+                            <div class="text-sm font-bold text-white">@priyacreates</div>
+                            <div class="ig-badge mt-1"><i class="fa-brands fa-youtube text-[9px]"></i> YouTube</div>
                         </div>
-                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"My brand went from 12K to 89K in 2 months. The hook-first editing style is incredible."</p>
-                        <div class="flex items-center gap-2 flex-wrap"><div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 0 → 89K followers</div><span class="text-yellow-400 text-xs">★★★★★</span></div>
-                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5"><img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=500&q=80" class="w-full h-28 object-cover"></div>
+                    </div>
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-3">"Subscribers doubled in 60 days. Best investment I've made for my channel, period."</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 0 → 200K subs</div>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
                     </div>
                 </div>
             </div>
@@ -824,22 +778,16 @@
         </div>
     </section>
 
-    <!-- ── Reel Lightbox Modal ───────────────────── -->
+    <!-- ── Reel / Video Lightbox Modal ───────────────────── -->
     <div id="reelModal" onclick="closeReel(event)">
         <div class="reel-modal-inner" id="reelModalInner">
             <button class="reel-modal-close" onclick="closeReelBtn()"><i class="fa-solid fa-xmark"></i></button>
-            <img id="reelModalImg" src="" alt="Reel preview">
-            <div class="reel-modal-meta">
+            <!-- Video player (used for .mp4 files) -->
+            <video id="reelModalVideo" style="width:100%;height:100%;object-fit:cover;display:none;" playsinline controls></video>
+            <!-- Fallback image (used when src is an image) -->
+            <img id="reelModalImg" src="" alt="Reel preview" style="display:none;">
+            <div class="reel-modal-meta" id="reelModalMeta">
                 <div class="text-white text-xs font-bold mb-1" id="reelModalLabel"></div>
-                <div class="reel-modal-play-bar">
-                    <button class="play-pause-btn" id="reelPlayPause" onclick="toggleReelPlay()">
-                        <i class="fa-solid fa-pause" id="reelPlayIcon"></i>
-                    </button>
-                    <div class="reel-modal-progress">
-                        <div class="reel-modal-progress-fill" id="reelProgress"></div>
-                    </div>
-                    <span class="text-neutral-400 text-[10px] font-mono" id="reelTimer">0:00</span>
-                </div>
             </div>
         </div>
     </div>
@@ -1029,30 +977,45 @@
             closeBooking();
         }
 
-        // ── Reel Lightbox ──────────────────────────────
-        let reelTimer = null;
-        let reelProgress = 0;
-        let reelPlaying = false;
-        const REEL_DURATION = 30; // simulate 30s reel
-
+        // ── Reel / Video Lightbox ──────────────────────────────
         function openReel(card) {
-            const img = card.querySelector('img');
-            const label = card.querySelector('.reel-overlay span');
-            document.getElementById('reelModalImg').src = img.src;
-            document.getElementById('reelModalLabel').textContent = label ? label.textContent : '';
-            reelProgress = 0;
-            reelPlaying = true;
-            document.getElementById('reelProgress').style.width = '0%';
-            document.getElementById('reelTimer').textContent = '0:00';
-            document.getElementById('reelPlayIcon').className = 'fa-solid fa-pause';
+            const videoEl   = card.querySelector('video');
+            const imgEl     = card.querySelector('img');
+            const labelEl   = card.querySelector('.reel-overlay span');
+            const label     = labelEl ? labelEl.textContent : '';
+
+            const modalVideo  = document.getElementById('reelModalVideo');
+            const modalImg    = document.getElementById('reelModalImg');
+            const modalLabel  = document.getElementById('reelModalLabel');
+            const modalInner  = document.getElementById('reelModalInner');
+
+            // Portrait = short-form reel card (has .reel-card inside), Landscape = long-form
+            const isPortrait = !!card.querySelector('.reel-card');
+            modalInner.className = 'reel-modal-inner ' + (isPortrait ? 'portrait' : 'landscape');
+
+            // Determine if it's a video or image card
+            const src = videoEl ? videoEl.src : (imgEl ? imgEl.src : '');
+            const isVideo = !!videoEl && !!src;
+
+            if (isVideo) {
+                modalVideo.src = src;
+                modalVideo.style.display = 'block';
+                modalImg.style.display   = 'none';
+                modalVideo.play();
+            } else {
+                modalImg.src = src;
+                modalImg.style.display   = 'block';
+                modalVideo.style.display = 'none';
+                modalVideo.pause();
+                modalVideo.src = '';
+            }
+
+            modalLabel.textContent = label;
             document.getElementById('reelModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            startReelProgress();
         }
 
-        function closeReelBtn() {
-            closeReelModal();
-        }
+        function closeReelBtn() { closeReelModal(); }
 
         function closeReel(e) {
             if (e.target === document.getElementById('reelModal')) closeReelModal();
@@ -1061,34 +1024,9 @@
         function closeReelModal() {
             document.getElementById('reelModal').classList.remove('active');
             document.body.style.overflow = '';
-            stopReelProgress();
-            reelPlaying = false;
-            reelProgress = 0;
-        }
-
-        function toggleReelPlay() {
-            reelPlaying = !reelPlaying;
-            document.getElementById('reelPlayIcon').className = reelPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
-            if (reelPlaying) startReelProgress();
-            else stopReelProgress();
-        }
-
-        function startReelProgress() {
-            stopReelProgress();
-            const interval = 200;
-            reelTimer = setInterval(() => {
-                reelProgress += (interval / (REEL_DURATION * 1000)) * 100;
-                if (reelProgress >= 100) {
-                    reelProgress = 0; // loop
-                }
-                const secs = Math.floor((reelProgress / 100) * REEL_DURATION);
-                document.getElementById('reelProgress').style.width = reelProgress + '%';
-                document.getElementById('reelTimer').textContent = `0:${String(secs).padStart(2,'0')}`;
-            }, interval);
-        }
-
-        function stopReelProgress() {
-            if (reelTimer) { clearInterval(reelTimer); reelTimer = null; }
+            const v = document.getElementById('reelModalVideo');
+            v.pause();
+            v.src = '';
         }
 
         // Close modal on Escape key

@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Media — High CTR Video Editing Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#030303',
+                            dark: '#0A0A0A',
+                            accent: '#FFFFFF',
+                            gray: '#8E8E93',
+                            border: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030303;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .ambient-glow-bottom {
+            position: absolute;
+            width: 800px;
+            height: 400px;
+            left: 50%;
+            bottom: -10%;
+            transform: translate(-50%, 0);
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+        .glass-nav {
+            background: rgba(13,13,13,0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        .glow-btn {
+            position: relative;
+            background: #FFFFFF;
+            color: #030303;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.25);
+        }
+        .glow-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 30px rgba(255,255,255,0.45);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333; }
+
+        /* 9:16 Reel Scroller */
+        .reel-scroll-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        .reel-scroll-track {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            animation: scrollLeft 28s linear infinite;
+        }
+        .reel-scroll-track.reverse {
+            animation: scrollRight 32s linear infinite;
+        }
+        .reel-scroll-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .reel-card {
+            flex-shrink: 0;
+            width: 160px;
+            aspect-ratio: 9/16;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            background: #111;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .reel-card:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 24px rgba(255,255,255,0.15);
+            z-index: 5;
+        }
+        .reel-card video, .reel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .reel-card .reel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 12px 10px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .reel-card:hover .reel-overlay { opacity: 1; }
+
+        /* Play button on hover */
+        .reel-play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: none;
+            flex-shrink: 0;
+        }
+        .reel-play-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 30px rgba(255,255,255,0.55);
+        }
+        .reel-play-btn i { color: #030303; font-size: 16px; margin-left: 3px; }
+
+        /* Reel Lightbox Modal */
+        #reelModal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #reelModal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .reel-modal-inner {
+            position: relative;
+            width: min(340px, 85vw);
+            aspect-ratio: 9/16;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 0 60px rgba(255,255,255,0.1);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        #reelModal.active .reel-modal-inner {
+            transform: scale(1);
+        }
+        #reelModalImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .reel-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+        .reel-modal-close:hover { background: rgba(255,255,255,0.15); }
+        .reel-modal-meta {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 16px 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+        }
+        .reel-modal-play-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .reel-modal-play-bar .play-pause-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .reel-modal-play-bar .play-pause-btn i { color: #030303; font-size: 13px; margin-left: 2px; }
+        .reel-modal-progress {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .reel-modal-progress-fill {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 99px;
+        }
+
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 24px;
+            min-width: 300px;
+            position: relative;
+        }
+        .ig-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+            border-radius: 50px;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+        }
+        .growth-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.25);
+            color: #4ade80;
+            border-radius: 50px;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Booking Modal Date Picker */
+        .date-slot {
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.01);
+            color: #aaa;
+        }
+        .date-slot:hover {
+            border-color: rgba(255,255,255,0.25);
+            color: white;
+        }
+        .date-slot.selected {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .date-slot .day { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 2px; }
+        .date-slot.selected .day { color: #aaa; }
+        .date-slot .date-num { font-size: 18px; font-weight: 800; line-height: 1; }
+        .date-slot .month-name { font-size: 9px; color: #666; }
+        .date-slot.selected .month-name { color: #aaa; }
+
+        /* Custom time input */
+        .custom-time-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .custom-time-row input[type="time"],
+        .custom-time-row input[type="date"] {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+            outline: none;
+            flex: 1;
+            color-scheme: dark;
+        }
+
+
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-white selection:text-black">
+
+    <div class="ambient-glow"></div>
+
+    <!-- Navigation -->
+    <header class="fixed top-6 left-0 right-0 z-50 px-4 flex justify-center">
+        <nav class="glass-nav rounded-full px-4 py-2.5 flex items-center justify-between w-full max-w-3xl transition-all duration-300">
+            <a href="#" class="flex items-center gap-2.5 pl-3 group">
+                <div class="flex flex-col gap-1 justify-center items-start">
+                    <span class="block w-4 h-0.5 bg-white rounded-full transition-transform group-hover:translate-x-0.5"></span>
+                    <span class="block w-3 h-0.5 bg-white rounded-full transition-transform group-hover:translate-x-1"></span>
+                </div>
+                <span class="font-bold tracking-[0.2em] text-[13px] text-white uppercase font-mono">FLOW MEDIA</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-[13px] font-medium text-neutral-400">
+                <a href="#work" class="hover:text-white transition-colors">Our Work</a>
+                <a href="#services" class="hover:text-white transition-colors">Solutions</a>
+                <a href="#results" class="hover:text-white transition-colors">Results</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Clients</a>
+            </div>
+            <button onclick="openBooking()" class="glow-btn text-[12px] md:text-[13px] px-5 py-2 rounded-full tracking-wide">
+                Book a Call
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col justify-center items-center px-4 pt-32 pb-20 z-10">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] text-xs font-medium text-neutral-400 mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Now booking creators & brands for Q3</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.08] mb-8">
+                <span class="block text-white filter drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">Hook your viewers,</span>
+                <span class="block mt-2 bg-gradient-to-b from-white via-neutral-400 to-neutral-600 bg-clip-text text-transparent opacity-90">Scale your channel.</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-neutral-400 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-12">
+                We design high-CTR cinematic edits that keep viewers locked in and clicking. Guaranteed growth through every frame.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="openBooking()" class="glow-btn px-8 py-4 rounded-full text-sm font-semibold tracking-wide w-full sm:w-auto flex items-center justify-center gap-2">
+                    Start Your Trial <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                </button>
+                <a href="#work" class="px-8 py-4 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/20 transition-all text-sm font-semibold tracking-wide text-white w-full sm:w-auto flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play text-xs text-neutral-400"></i> View Portfolio
+                </a>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-24 w-full max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
+            <div class="border border-white/5 bg-white/[0.01] rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">240M+</div>
+                <div class="text-xs text-neutral-500 font-medium uppercase tracking-widest">Total Views Generated</div>
+            </div>
+            <div class="border border-white/5 bg-white/[0.01] rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">24hr</div>
+                <div class="text-xs text-neutral-500 font-medium uppercase tracking-widest">Average Turnaround</div>
+            </div>
+            <div class="border border-white/5 bg-white/[0.01] rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">45%</div>
+                <div class="text-xs text-neutral-500 font-medium uppercase tracking-widest">Retention Boost</div>
+            </div>
+            <div class="border border-white/5 bg-white/[0.01] rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">High</div>
+                <div class="text-xs text-neutral-500 font-medium uppercase tracking-widest">CTR Video Guarantee</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         OUR HIGH CTR WORKS — 9:16 Scrolling Reels
+    ═══════════════════════════════════════════════ -->
+    <section id="work" class="relative py-24 bg-[#050505] border-y border-white/5 overflow-hidden">
+        <div class="ambient-glow-bottom"></div>
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Our Craft in Action</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">Our High CTR Works</p>
+                <p class="text-neutral-500 mt-4 max-w-lg mx-auto">Scroll through our signature edits — crafted for maximum retention and click-through rate.</p>
+            </div>
+
+            <!-- ROW 1: Left → Right scroll -->
+            <div class="reel-scroll-wrapper mb-4">
+                <div class="reel-scroll-track" id="reelRow1">
+                    <!-- Reel cards duplicated for seamless loop -->
+                    <!-- Set A -->
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80" alt="Reel 1" data-label="🔥 12.4M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🔥 12.4M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1574717024453-354056afd6fc?w=400&q=80" alt="Reel 2" data-label="⚡ 8.9M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">⚡ 8.9M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1598550487031-0898b4852123?w=400&q=80" alt="Reel 3" data-label="🎯 5.2M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎯 5.2M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1569240651611-f3b8ae2f8deb?w=400&q=80" alt="Reel 4" data-label="📈 3.7M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">📈 3.7M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1536240478700-b869ad10a2ab?w=400&q=80" alt="Reel 5" data-label="🔥 9.1M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🔥 9.1M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80" alt="Reel 6" data-label="💥 4.6M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">💥 4.6M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80" alt="Reel 7" data-label="🎬 7.3M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎬 7.3M Views</span>
+                        </div>
+                    </div>
+                    <!-- Set B (duplicate for seamless) -->
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80" alt="Reel 1" data-label="🔥 12.4M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🔥 12.4M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1574717024453-354056afd6fc?w=400&q=80" alt="Reel 2" data-label="⚡ 8.9M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">⚡ 8.9M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1598550487031-0898b4852123?w=400&q=80" alt="Reel 3" data-label="🎯 5.2M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎯 5.2M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1569240651611-f3b8ae2f8deb?w=400&q=80" alt="Reel 4" data-label="📈 3.7M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">📈 3.7M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1536240478700-b869ad10a2ab?w=400&q=80" alt="Reel 5" data-label="🔥 9.1M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🔥 9.1M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80" alt="Reel 6" data-label="💥 4.6M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">💥 4.6M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80" alt="Reel 7" data-label="🎬 7.3M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎬 7.3M Views</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2: Right → Left scroll (reverse) -->
+            <div class="reel-scroll-wrapper mb-8">
+                <div class="reel-scroll-track reverse" id="reelRow2">
+                    <!-- Set A -->
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1621361365424-06f0e1eb5051?w=400&q=80" alt="Reel 8" data-label="🚀 6.8M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🚀 6.8M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1588912914842-f5f8beefaef1?w=400&q=80" alt="Reel 9" data-label="⭐ 11M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">⭐ 11M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1601933513793-45d855e765e2?w=400&q=80" alt="Reel 10" data-label="🎯 2.9M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎯 2.9M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80" alt="Reel 11" data-label="💎 4.1M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">💎 4.1M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=400&q=80" alt="Reel 12" data-label="🔥 8.5M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🔥 8.5M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=400&q=80" alt="Reel 13" data-label="📊 3.3M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">📊 3.3M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=80" alt="Reel 14" data-label="🎵 5.7M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎵 5.7M Views</span>
+                        </div>
+                    </div>
+                    <!-- Set B duplicate -->
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1621361365424-06f0e1eb5051?w=400&q=80" alt="Reel 8" data-label="🚀 6.8M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🚀 6.8M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1588912914842-f5f8beefaef1?w=400&q=80" alt="Reel 9" data-label="⭐ 11M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">⭐ 11M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1601933513793-45d855e765e2?w=400&q=80" alt="Reel 10" data-label="🎯 2.9M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎯 2.9M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80" alt="Reel 11" data-label="💎 4.1M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">💎 4.1M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=400&q=80" alt="Reel 12" data-label="🔥 8.5M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🔥 8.5M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=400&q=80" alt="Reel 13" data-label="📊 3.3M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">📊 3.3M Views</span>
+                        </div>
+                    </div>
+                    <div class="reel-card" onclick="openReel(this)">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=80" alt="Reel 14" data-label="🎵 5.7M Views">
+                        <div class="reel-overlay">
+                            <button class="reel-play-btn"><i class="fa-solid fa-play"></i></button>
+                            <span class="text-white text-[10px] font-bold">🎵 5.7M Views</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Bento Grid -->
+    <section id="services" class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Our Services</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">Optimized for platform algorithms.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors rounded-2xl p-8 relative overflow-hidden group">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full filter blur-xl group-hover:bg-white/10 transition-colors"></div>
+                <div class="text-3xl mb-6 text-white"><i class="fa-brands fa-tiktok"></i></div>
+                <h3 class="text-xl font-bold mb-3">Virality Short-Form</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">High-CTR shorts, TikToks, and Reels designed for rapid algorithmic scale and organic discovery.</p>
+                <ul class="space-y-2.5 text-xs text-neutral-500 font-mono">
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Custom Visual Hooks</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Sound Effects Library</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Dynamic Captions & Emojis</li>
+                </ul>
+            </div>
+            <div class="border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors rounded-2xl p-8 relative overflow-hidden group">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full filter blur-xl group-hover:bg-white/10 transition-colors"></div>
+                <div class="text-3xl mb-6 text-white"><i class="fa-brands fa-youtube"></i></div>
+                <h3 class="text-xl font-bold mb-3">YouTube Documentaries</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">Polished long-form storytelling edits reminiscent of modern cinema and educational video essays.</p>
+                <ul class="space-y-2.5 text-xs text-neutral-500 font-mono">
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Script pacing optimization</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Custom asset sourcing</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Immersive soundscapes</li>
+                </ul>
+            </div>
+            <div class="border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors rounded-2xl p-8 relative overflow-hidden group">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full filter blur-xl group-hover:bg-white/10 transition-colors"></div>
+                <div class="text-3xl mb-6 text-white"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="text-xl font-bold mb-3">VSLs & Paid Ads</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">High-converting video sales letters and advertising creatives specifically calibrated to drive ROI.</p>
+                <ul class="space-y-2.5 text-xs text-neutral-500 font-mono">
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Conversion hook iterations</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Animated text highlighting</li>
+                    <li><i class="fa-solid fa-circle-check text-white text-[9px] mr-2"></i> Color grading for trust</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         CLIENT FEEDBACK — Instagram Growth Showcase
+    ═══════════════════════════════════════════════ -->
+    <section id="pricing" class="py-24 bg-[#050505] border-y border-white/5 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-xs text-neutral-400 font-bold tracking-[0.2em] uppercase mb-4">Real Results</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">What our clients are saying.</p>
+                <p class="text-neutral-500 mt-4 max-w-lg mx-auto">Real creators. Real Instagram growth. Powered by Flow Media edits.</p>
+            </div>
+
+            <!-- Testimonial scrolling row 1 -->
+            <div class="reel-scroll-wrapper mb-6">
+                <div style="display:flex; gap:16px; width:max-content; animation: scrollLeft 35s linear infinite;">
+                    <!-- Card 1 -->
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">RK</div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@rishabhk.creates</div>
+                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
+                            </div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"Flow Media completely transformed my reels. My CTR went from 2% to 11% in just 3 weeks. The edits are insane quality."</p>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +48K followers / month</div>
+                            <span class="text-yellow-400 text-xs">★★★★★</span>
+                        </div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=500&q=80" alt="Instagram growth screenshot" class="w-full h-28 object-cover">
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-sm">SM</div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@sara.media.co</div>
+                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
+                            </div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"My brand went from 12K to 89K in 2 months. The hook-first editing style gets people watching every single time."</p>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 0 → 89K followers</div>
+                            <span class="text-yellow-400 text-xs">★★★★★</span>
+                        </div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=500&q=80" alt="Instagram growth" class="w-full h-28 object-cover">
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-sm">AJ</div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@ajcontent.ig</div>
+                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
+                            </div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"I was posting consistently but getting nowhere. Flow Media's editing style literally changed everything. 3 viral reels in my first month."</p>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 3 Viral Reels in Month 1</div>
+                            <span class="text-yellow-400 text-xs">★★★★★</span>
+                        </div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=500&q=80" alt="Growth chart" class="w-full h-28 object-cover">
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-400 flex items-center justify-center text-white font-bold text-sm">NP</div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@neilpatelio</div>
+                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
+                            </div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"The 24-hour turnaround is INSANE. I feed them raw footage and get back a viral-ready reel the next day. Worth every penny."</p>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +120K reach / reel</div>
+                            <span class="text-yellow-400 text-xs">★★★★★</span>
+                        </div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80" alt="Analytics" class="w-full h-28 object-cover">
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">LS</div>
+                            <div>
+                                <div class="text-sm font-bold text-white">@linashots</div>
+                                <div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div>
+                            </div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"Every edit feels like it was made by a director. The cinematic grading on my travel content is just next level."</p>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +62K in 6 weeks</div>
+                            <span class="text-yellow-400 text-xs">★★★★★</span>
+                        </div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=500&q=80" alt="Growth" class="w-full h-28 object-cover">
+                        </div>
+                    </div>
+                    <!-- Duplicates for scroll loop -->
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">RK</div>
+                            <div><div class="text-sm font-bold text-white">@rishabhk.creates</div><div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div></div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"Flow Media completely transformed my reels. My CTR went from 2% to 11% in just 3 weeks."</p>
+                        <div class="flex items-center gap-2 flex-wrap"><div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +48K followers / month</div><span class="text-yellow-400 text-xs">★★★★★</span></div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5"><img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=500&q=80" class="w-full h-28 object-cover"></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-sm">SM</div>
+                            <div><div class="text-sm font-bold text-white">@sara.media.co</div><div class="ig-badge mt-1"><i class="fa-brands fa-instagram text-[9px]"></i> Instagram</div></div>
+                        </div>
+                        <p class="text-neutral-300 text-sm leading-relaxed mb-4">"My brand went from 12K to 89K in 2 months. The hook-first editing style is incredible."</p>
+                        <div class="flex items-center gap-2 flex-wrap"><div class="growth-pill"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i> 0 → 89K followers</div><span class="text-yellow-400 text-xs">★★★★★</span></div>
+                        <div class="mt-3 rounded-xl overflow-hidden border border-white/5"><img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=500&q=80" class="w-full h-28 object-cover"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA after testimonials -->
+            <div class="text-center mt-10">
+                <button onclick="openBooking()" class="glow-btn px-10 py-4 rounded-full text-sm font-bold tracking-wide">
+                    Get Your Own Growth Story →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Reel Lightbox Modal ───────────────────── -->
+    <div id="reelModal" onclick="closeReel(event)">
+        <div class="reel-modal-inner" id="reelModalInner">
+            <button class="reel-modal-close" onclick="closeReelBtn()"><i class="fa-solid fa-xmark"></i></button>
+            <img id="reelModalImg" src="" alt="Reel preview">
+            <div class="reel-modal-meta">
+                <div class="text-white text-xs font-bold mb-1" id="reelModalLabel"></div>
+                <div class="reel-modal-play-bar">
+                    <button class="play-pause-btn" id="reelPlayPause" onclick="toggleReelPlay()">
+                        <i class="fa-solid fa-pause" id="reelPlayIcon"></i>
+                    </button>
+                    <div class="reel-modal-progress">
+                        <div class="reel-modal-progress-fill" id="reelProgress"></div>
+                    </div>
+                    <span class="text-neutral-400 text-[10px] font-mono" id="reelTimer">0:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="outcomes" class="border-t border-white/5 py-12 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-neutral-500 text-xs">
+        <div class="flex items-center gap-2 mb-4 md:mb-0">
+            <span class="block w-3 h-0.5 bg-neutral-500"></span>
+            <span class="font-bold tracking-[0.2em] font-mono text-neutral-300 uppercase">FLOW MEDIA</span>
+        </div>
+        <div class="flex gap-8 mb-4 md:mb-0">
+            <a href="#" class="hover:text-white transition-colors">Twitter / X</a>
+            <a href="#" class="hover:text-white transition-colors">YouTube Channel</a>
+            <a href="#" class="hover:text-white transition-colors">Privacy</a>
+        </div>
+        <div>&copy; 2025 Flow Media Agency. All rights reserved.</div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════
+         BOOKING MODAL — Enhanced with custom date/time
+    ═══════════════════════════════════════════════ -->
+    <div id="bookingModal" class="fixed inset-0 bg-black/90 backdrop-blur-lg z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-brand-dark border border-white/10 rounded-2xl w-full max-w-lg p-8 m-4 relative transform translate-y-4 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="modalContent">
+            
+            <button onclick="closeBooking()" class="absolute top-6 right-6 text-neutral-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <h3 class="text-2xl font-extrabold mb-1">Book Your Strategy Call</h3>
+            <p class="text-neutral-400 text-sm mb-6">Let's craft high-CTR video concepts for your content brand.</p>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-neutral-500 mb-1.5">Your Name</label>
+                    <input type="text" placeholder="Alex Hormozi" class="w-full bg-white/[0.02] border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-neutral-500 mb-1.5">Email Address</label>
+                    <input type="email" placeholder="alex@creators.co" class="w-full bg-white/[0.02] border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-neutral-500 mb-1.5">Channel / Brand Link</label>
+                    <input type="url" placeholder="instagram.com/yourchannel" class="w-full bg-white/[0.02] border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all">
+                </div>
+
+                <!-- Date Picker -->
+                <div>
+                    <label class="block text-xs font-mono text-neutral-500 mb-2">Select a Date</label>
+                    <div class="grid grid-cols-5 gap-2" id="dateSlots">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Time Slot Picker -->
+                <div id="timePickerSection">
+                    <label class="block text-xs font-mono text-neutral-500 mb-2">Select a Time</label>
+                    <div class="grid grid-cols-3 gap-2" id="timeSlots">
+                        <button onclick="selectTime(this,'9:00 AM')" class="date-slot py-2.5 text-xs">9:00 AM</button>
+                        <button onclick="selectTime(this,'11:00 AM')" class="date-slot py-2.5 text-xs">11:00 AM</button>
+                        <button onclick="selectTime(this,'1:00 PM')" class="date-slot py-2.5 text-xs">1:00 PM</button>
+                        <button onclick="selectTime(this,'3:00 PM')" class="date-slot py-2.5 text-xs">3:00 PM</button>
+                        <button onclick="selectTime(this,'5:00 PM')" class="date-slot py-2.5 text-xs">5:00 PM</button>
+                        <button onclick="selectTime(this,'7:00 PM')" class="date-slot py-2.5 text-xs">7:00 PM</button>
+                    </div>
+
+                    <!-- Custom Time & Date -->
+                    <div class="mt-3">
+                        <label class="block text-xs font-mono text-neutral-600 mb-1.5">— or pick a custom date & time —</label>
+                        <div class="custom-time-row">
+                            <input type="date" id="customDate" min="" placeholder="Custom date">
+                            <input type="time" id="customTime" placeholder="Custom time">
+                            <button onclick="applyCustomDateTime()" class="bg-white/10 border border-white/10 hover:border-white/25 text-white text-xs px-4 py-2 rounded-lg transition-all whitespace-nowrap">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Summary -->
+                <div id="selectedSummary" class="hidden bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white">
+                    <i class="fa-solid fa-calendar-check text-emerald-400 mr-2"></i>
+                    <span id="summaryText">—</span>
+                </div>
+
+                <button onclick="confirmBooking()" class="w-full glow-btn mt-2 py-4 rounded-xl text-xs font-bold uppercase tracking-wider">
+                    Confirm Video Strategy Session
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // ── Booking Modal ──────────────────────────────
+        function openBooking() {
+            const modal = document.getElementById('bookingModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-4');
+            buildDateSlots();
+        }
+        function closeBooking() {
+            const modal = document.getElementById('bookingModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.add('translate-y-4');
+        }
+
+        let selectedDate = null;
+        let selectedTime = null;
+
+        const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+        function buildDateSlots() {
+            const container = document.getElementById('dateSlots');
+            container.innerHTML = '';
+            const today = new Date();
+            for (let i = 1; i <= 10; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() + i);
+                const btn = document.createElement('button');
+                btn.className = 'date-slot';
+                btn.innerHTML = `
+                    <div class="day">${DAYS[d.getDay()]}</div>
+                    <div class="date-num">${d.getDate()}</div>
+                    <div class="month-name">${MONTHS[d.getMonth()]}</div>
+                `;
+                btn.dataset.date = d.toDateString();
+                btn.onclick = () => selectDate(btn, d);
+                container.appendChild(btn);
+            }
+            // Set min for custom date input
+            const minDate = new Date(today);
+            minDate.setDate(today.getDate() + 1);
+            document.getElementById('customDate').min = minDate.toISOString().split('T')[0];
+        }
+
+        function selectDate(btn, dateObj) {
+            document.querySelectorAll('#dateSlots .date-slot').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedDate = dateObj.toDateString();
+            updateSummary();
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('#timeSlots .date-slot').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedTime = time;
+            updateSummary();
+        }
+
+        function applyCustomDateTime() {
+            const dateInput = document.getElementById('customDate').value;
+            const timeInput = document.getElementById('customTime').value;
+            if (!dateInput || !timeInput) {
+                alert('Please pick both a custom date and time.');
+                return;
+            }
+            const d = new Date(dateInput + 'T00:00:00');
+            selectedDate = d.toDateString();
+            // Format time
+            const [h, m] = timeInput.split(':');
+            const hour = parseInt(h);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const h12 = ((hour + 11) % 12 + 1);
+            selectedTime = `${h12}:${m} ${ampm}`;
+            // Clear preset selections
+            document.querySelectorAll('#dateSlots .date-slot').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('#timeSlots .date-slot').forEach(b => b.classList.remove('selected'));
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const summary = document.getElementById('selectedSummary');
+            const text = document.getElementById('summaryText');
+            if (selectedDate && selectedTime) {
+                summary.classList.remove('hidden');
+                text.textContent = `${selectedDate} at ${selectedTime}`;
+            }
+        }
+
+        function confirmBooking() {
+            if (!selectedDate || !selectedTime) {
+                alert('Please select a date and time for your session.');
+                return;
+            }
+            alert(`🎬 Strategy call booked for ${selectedDate} at ${selectedTime}!\n\nWe'll send a Zoom link and confirmation to your email shortly.`);
+            closeBooking();
+        }
+
+        // ── Reel Lightbox ──────────────────────────────
+        let reelTimer = null;
+        let reelProgress = 0;
+        let reelPlaying = false;
+        const REEL_DURATION = 30; // simulate 30s reel
+
+        function openReel(card) {
+            const img = card.querySelector('img');
+            const label = card.querySelector('.reel-overlay span');
+            document.getElementById('reelModalImg').src = img.src;
+            document.getElementById('reelModalLabel').textContent = label ? label.textContent : '';
+            reelProgress = 0;
+            reelPlaying = true;
+            document.getElementById('reelProgress').style.width = '0%';
+            document.getElementById('reelTimer').textContent = '0:00';
+            document.getElementById('reelPlayIcon').className = 'fa-solid fa-pause';
+            document.getElementById('reelModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            startReelProgress();
+        }
+
+        function closeReelBtn() {
+            closeReelModal();
+        }
+
+        function closeReel(e) {
+            if (e.target === document.getElementById('reelModal')) closeReelModal();
+        }
+
+        function closeReelModal() {
+            document.getElementById('reelModal').classList.remove('active');
+            document.body.style.overflow = '';
+            stopReelProgress();
+            reelPlaying = false;
+            reelProgress = 0;
+        }
+
+        function toggleReelPlay() {
+            reelPlaying = !reelPlaying;
+            document.getElementById('reelPlayIcon').className = reelPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+            if (reelPlaying) startReelProgress();
+            else stopReelProgress();
+        }
+
+        function startReelProgress() {
+            stopReelProgress();
+            const interval = 200;
+            reelTimer = setInterval(() => {
+                reelProgress += (interval / (REEL_DURATION * 1000)) * 100;
+                if (reelProgress >= 100) {
+                    reelProgress = 0; // loop
+                }
+                const secs = Math.floor((reelProgress / 100) * REEL_DURATION);
+                document.getElementById('reelProgress').style.width = reelProgress + '%';
+                document.getElementById('reelTimer').textContent = `0:${String(secs).padStart(2,'0')}`;
+            }, interval);
+        }
+
+        function stopReelProgress() {
+            if (reelTimer) { clearInterval(reelTimer); reelTimer = null; }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeReelModal();
+        });
+
+    </script>
+</body>
+</html>
